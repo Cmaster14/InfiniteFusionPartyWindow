@@ -1,27 +1,29 @@
 # InfiniteFusionPartyWindow
 A Party display window for the Pokémon fangame Infinite Fusion
 
-About:
-	-This is a very basic party display to be used with Pokémon Infinite Fusion. It was intended for use as an overlay item
+## About:
+	
+ -This is a very basic party display to be used with Pokémon Infinite Fusion. It was intended for use as an overlay item
 		for any content creation needs. Some changes will be made to the Infinite Fusion game files to allow it to work.
 
 
-Setup:
- -You'll need to make some changes to the Scripts that run Infinite Fusion from the InfiniteFusion\Data\Scripts directory
-		See WhatToChangeForPartyWindow.txt for the code changes, and complete those before trying to run PartyWindow
+## Setup:
+ 
+ -Extract the [InfiniteFusionPartyWindow.zip](https://github.com/user-attachments/files/17357828/InfiniteFusionPartyWindow.zip) file to your InfiniteFusion install directory. This should be the same directory where Game.exe is located
+
+ -You'll need to make some changes to the Scripts that run Infinite Fusion from the InfiniteFusion\Data\Scripts directory. See WhatToChangeForPartyWindow.txt for the code changes, and complete those before trying to run PartyWindow
 	
  -If you want the window to appear in horizontal mode (3 mons on top and bottom), update the first line of orientation.txt to 
-       be one of ["horizontal", "h", "horiz", "side", "flat", "trios", "thicc", "small"]
-	        If it's anything else, or nothing, the window will be vertical orientation (3 rows of 2 mons)
+       be one of ["horizontal", "h", "horiz", "side", "flat", "trios", "thicc", "small"]. If it's anything else, or nothing, the window will be vertical orientation (3 rows of 2 mons)
 	
  -To load the party that will be displayed, you'll need to open up your party menu in Infinite Fusion.
 	
- -To load any alternate sprites, you will need to see that sprite load in game. 
-		That can be easily done by scrolling through summary screens for example
+ -To load any alternate sprites, you will need to see that sprite load in game. That can be easily done by scrolling through summary screens for example
 		
 		
-Usage:
-	-Run PartyWindow.exe 
+## Usage:
+  
+  -Run PartyWindow.exe 
 	
   -To change positioning for one of the pokemon (for overlay or other purposes): 
 		-Ensure you have the Party window selected
