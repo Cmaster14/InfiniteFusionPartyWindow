@@ -4,7 +4,7 @@ A Party display window for the Pokémon fangame Infinite Fusion
 ## About:
 	
  -This is a very basic transparent party display window to be used with Pokémon Infinite Fusion. It was intended for use as an overlay item
-		for any content creation needs. Some changes will be made to the Infinite Fusion game files to allow it to work.
+		for any content creation needs. Some changes will need to be made to the Infinite Fusion game files to allow it to work.
 ![VerticalSample](https://github.com/user-attachments/assets/0b73ed1f-2c99-4d8b-9e69-8a8540147ae1)
 ![HorizontalSample](https://github.com/user-attachments/assets/f94f86b9-b002-4dd0-ace7-217bfb823afd)
 ![MovedAroundSample](https://github.com/user-attachments/assets/1a459da2-6c7e-46d2-9ee5-ba3d0a83a95d)
