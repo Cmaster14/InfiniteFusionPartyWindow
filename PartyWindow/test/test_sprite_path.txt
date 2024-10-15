@@ -1,0 +1,6 @@
+Graphics/CustomBattlers/indexed/269/269.377a.png
+Graphics/CustomBattlers/indexed/373/373.149.png
+Graphics/CustomBattlers/indexed/270/270.334c.png
+Graphics/CustomBattlers/indexed/344/344.468.png
+Graphics/CustomBattlers/indexed/335/335.68.png
+Graphics/CustomBattlers/indexed/227/227.418.png

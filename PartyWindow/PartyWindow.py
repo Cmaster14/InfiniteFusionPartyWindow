@@ -5,7 +5,7 @@ import Paths
 # Transparent window to display a party of up to 6 Pokemon, and allow their repositioning within the window
 class PartyWindow:
 
-    def __init__(self, party, orientation="vertical"):
+    def __init__(self, party, real="real"):
         self.party = party
         self.orientationDimensions = {
             "vertical": [600, 900, 500, 15],
@@ -15,6 +15,27 @@ class PartyWindow:
         self.oriY = self.orientationDimensions[orientation][1]
         self.cutX = self.orientationDimensions[orientation][2]
         self.pad = self.orientationDimensions[orientation][3]
+        self.real = real
+        self.paths = {
+            "test":
+            {
+                "party": Paths.testParty,
+                "sprites": Paths.testPath,
+                "orientation": Paths.testOrientation,
+                "images": Paths.testImagePath
+            },
+            "real":
+            {
+                "party": Paths.partyFile,
+                "sprites": Paths.pathFile,
+                "orientation": Paths.orientationFile
+            }
+        }
+        self.orientation = "vertical"
+        with open(self.paths[self.real]["orientation"], 'r') as f:
+            lines = f.readlines()
+            if lines[0].strip() in horizontalOptions:
+                self.orientation = "horizontal"
         self.canvas = Canvas(self.party, width=self.oriX, height=self.oriY)
         self.buttonCanvas = Canvas(self.party, width=self.oriX, height=100)
         self.imagePathList = []
@@ -30,11 +51,12 @@ class PartyWindow:
         self.setupImages()
         self.positionImages()
         self.setupButtons()
+        self.party.after(30000, self.reload)
 
     # Read party file and image path file to add to imagePathList
     def readPartyFile(self):
         keep = []
-        with open(Paths.partyFile, 'r') as f:
+        with open(self.paths[self.real]["party"], 'r') as f:
             partyList = f.read().splitlines()
             for poke in partyList:
                 if "B" in poke:
@@ -45,10 +67,13 @@ class PartyWindow:
 
                 imagePath = self.getImagePath(mon)
                 if imagePath:
-                    self.imagePathList.append("../" + imagePath)
+                    if self.real == "test":
+                        self.imagePathList.append(str(self.paths[self.real]["images"]) + imagePath)
+                    else:
+                        self.imagePathList.append("../" + imagePath)
                     keep.append(imagePath)
 
-        with open(Paths.pathFile, 'w') as w:
+        with open(self.paths[self.real]["sprites"], 'w') as w:
             for path in keep:
                 w.write(path + "\n")
 
@@ -60,7 +85,7 @@ class PartyWindow:
 
     # Get image path
     def getImagePath(self, mon):
-        with open(Paths.pathFile, 'r') as r:
+        with open(self.paths[self.real]["sprites"], 'r') as r:
             alts = r.read().splitlines()
         alts.reverse()
         for a in alts:
@@ -131,7 +156,7 @@ class PartyWindow:
             button.pack(side=LEFT, ipadx=self.pad)
 
         reload = Button(self.buttonCanvas, text="Reload", background="#ffffff",
-                           command=lambda root=self.buttonCanvas: root.reload.configure(self.reload(0)))
+                           command=lambda root=self.buttonCanvas: root.reload.configure(self.reload))
         self.buttonList.append(reload)
         reload.pack(side=LEFT, ipadx=15, ipady=19)
         self.buttonCanvas.reload = reload
@@ -171,7 +196,7 @@ class PartyWindow:
                 button.config(background="#ffffff")
 
     # Recreates the canvases for images and buttons, then re-runs setup
-    def reload(self, e):
+    def reload(self, e=None):
         self.canvas.destroy()
         self.canvas = Canvas(self.party, width=self.oriX, height=self.oriY)
         self.buttonCanvas.destroy()
@@ -186,11 +211,7 @@ class PartyWindow:
 
 orientation = "vertical"
 horizontalOptions = ["horizontal", "h", "horiz", "side", "flat", "trios", "thicc", "small"]
-with open(Paths.orientationFile, 'r') as f:
-    lines = f.readlines()
-    if lines[0].strip() in horizontalOptions:
-        orientation = "horizontal"
-partyWindow = PartyWindow(party=Tk(), orientation=orientation)
+partyWindow = PartyWindow(party=Tk(), real="real")
 partyWindow.party.attributes('-transparentcolor', '#f0f0f0')
 partyWindow.party.title('Party')
 partyWindow.setup()
