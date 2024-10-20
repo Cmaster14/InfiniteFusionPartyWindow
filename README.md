@@ -12,7 +12,7 @@ A Party display window for the Pokémon fangame Infinite Fusion
 
 ## Setup:
  
- -Extract the [InfiniteFusionPartyWindow.zip](https://github.com/user-attachments/files/17357828/InfiniteFusionPartyWindow.zip) file to your InfiniteFusion install directory. This should be the same directory where Game.exe is located
+ -Extract the [InfiniteFusionPartyWindow.zip](https://github.com/user-attachments/files/17450107/InfiniteFusionPartyWindow.zip) file to your InfiniteFusion install directory. This should be the same directory where Game.exe is located
 
  -You'll need to make some changes to the Scripts that run Infinite Fusion from the InfiniteFusion\Data\Scripts directory. See WhatToChangeForPartyWindow.txt for the code changes, and complete those before trying to run PartyWindow
 	
