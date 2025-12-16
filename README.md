@@ -1,6 +1,8 @@
 # InfiniteFusionPartyWindow
 A Party display window for the Pokémon fangame Infinite Fusion
 
+# DOES NOT WORK WITH SPRITE SPREADSHEETS - LIKELY NONFUNCTIONAL WITH CURRENT GAME VERSION
+
 ## About:
 	
  -This is a very basic transparent party display window to be used with Pokémon Infinite Fusion. It was intended for use as an overlay item
