@@ -1,41 +1,30 @@
 from tkinter import *
 import Paths
+import os
 
 
 # Transparent window to display a party of up to 6 Pokemon, and allow their repositioning within the window
 class PartyWindow:
 
-    def __init__(self, party, real="real"):
+    def __init__(self, party):
         self.party = party
+        self.paths = {
+            "orientation": Paths.orientationFile,
+            "offload": Paths.partyOffload
+        }
         self.orientationDimensions = {
             "vertical": [600, 900, 500, 15],
             "horizontal": [900, 600, 800, 35]
         }
-        self.oriX = self.orientationDimensions[orientation][0]
-        self.oriY = self.orientationDimensions[orientation][1]
-        self.cutX = self.orientationDimensions[orientation][2]
-        self.pad = self.orientationDimensions[orientation][3]
-        self.real = real
-        self.paths = {
-            "test":
-            {
-                "party": Paths.testParty,
-                "sprites": Paths.testPath,
-                "orientation": Paths.testOrientation,
-                "images": Paths.testImagePath
-            },
-            "real":
-            {
-                "party": Paths.partyFile,
-                "sprites": Paths.pathFile,
-                "orientation": Paths.orientationFile
-            }
-        }
         self.orientation = "vertical"
-        with open(self.paths[self.real]["orientation"], 'r') as f:
+        with open(self.paths["orientation"], 'r') as f:
             lines = f.readlines()
             if lines[0].strip() in horizontalOptions:
                 self.orientation = "horizontal"
+        self.oriX = self.orientationDimensions[self.orientation][0]
+        self.oriY = self.orientationDimensions[self.orientation][1]
+        self.cutX = self.orientationDimensions[self.orientation][2]
+        self.pad = self.orientationDimensions[self.orientation][3]
         self.canvas = Canvas(self.party, width=self.oriX, height=self.oriY)
         self.buttonCanvas = Canvas(self.party, width=self.oriX, height=100)
         self.imagePathList = []
@@ -47,51 +36,24 @@ class PartyWindow:
 
     # Run setup sequence
     def setup(self):
-        self.readPartyFile()
+        self.getSpritePaths()
         self.setupImages()
         self.positionImages()
         self.setupButtons()
         self.party.after(30000, self.reload)
 
-    # Read party file and image path file to add to imagePathList
-    def readPartyFile(self):
-        keep = []
-        with open(self.paths[self.real]["party"], 'r') as f:
-            partyList = f.read().splitlines()
-            for poke in partyList:
-                if "B" in poke:
-                    scrambledImage = poke.replace("B", "").split("H")
-                    mon = scrambledImage[1] + "." + scrambledImage[0]
-                else:
-                    mon = poke
-
-                imagePath = self.getImagePath(mon)
-                if imagePath:
-                    if self.real == "test":
-                        self.imagePathList.append(str(self.paths[self.real]["images"]) + imagePath)
-                    else:
-                        self.imagePathList.append("../" + imagePath)
-                    keep.append(imagePath)
-
-        with open(self.paths[self.real]["sprites"], 'w') as w:
-            for path in keep:
-                w.write(path + "\n")
+    # Get the paths to the existing png files in PartyOffload
+    def getSpritePaths(self):
+        for root, dirs, files in os.walk(r'' + self.paths['offload']):
+            for file in files:
+                if file.endswith(".png"):
+                    self.imagePathList.append(os.path.join(root, file))
 
     # Create image objects and add them to working lists
     def setupImages(self):
         for im in self.imagePathList:
             self.imageList.append(PhotoImage(file=im).subsample(3, 3).zoom(2, 2))
             self.imageButtonList.append(PhotoImage(file=im).subsample(5, 5))
-
-    # Get image path
-    def getImagePath(self, mon):
-        with open(self.paths[self.real]["sprites"], 'r') as r:
-            alts = r.read().splitlines()
-        alts.reverse()
-        for a in alts:
-            if mon in a:
-                return a
-        return False
 
     # Positioning the Images inside the canvas
     def positionImages(self):
@@ -209,9 +171,8 @@ class PartyWindow:
         self.setup()
 
 
-orientation = "vertical"
 horizontalOptions = ["horizontal", "h", "horiz", "side", "flat", "trios", "thicc", "small"]
-partyWindow = PartyWindow(party=Tk(), real="real")
+partyWindow = PartyWindow(party=Tk())
 partyWindow.party.attributes('-transparentcolor', '#f0f0f0')
 partyWindow.party.title('Party')
 partyWindow.setup()

@@ -1,6 +1,6 @@
-('C:\\Users\\cmceu\\PycharmProjects\\PokeParty\\PartyWindow\\build\\PartyWindow\\PYZ-00.pyz',
+('C:\\git\\InfiniteFusionPartyWindow\\PartyWindow\\build\\PartyWindow\\PYZ-00.pyz',
  [('Paths',
-   'C:\\Users\\cmceu\\PycharmProjects\\PokeParty\\PartyWindow\\Paths.py',
+   'C:\\git\\InfiniteFusionPartyWindow\\PartyWindow\\Paths.py',
    'PYMODULE'),
   ('_compat_pickle',
    'C:\\Users\\cmceu\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\_compat_pickle.py',

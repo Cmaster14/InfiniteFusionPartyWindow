@@ -1,7 +1,2 @@
-partyFile = "../InfiniteFusionPartyWindow/party.txt"
-pathFile = "../InfiniteFusionPartyWindow/sprite_path.txt"
 orientationFile = "../InfiniteFusionPartyWindow/orientation.txt"
-testParty = "../PartyWindow/test/test_party.txt"
-testPath = "../PartyWindow/test/test_sprite_path.txt"
-testOrientation = "../PartyWindow/test/test_orientation.txt"
-testImagePath = "[Your path to your InfiniteFusion directory where Graphics is located]"
+partyOffload = "../PartyOffload/"
